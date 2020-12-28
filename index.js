@@ -43,6 +43,5 @@ function cameraBuilder(cameraJson) {
     camBox.appendChild(camTitle);
     camBox.appendChild(desc);
     camBox.appendChild(price);
-
     camList.appendChild(camBox);
 }

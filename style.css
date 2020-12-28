@@ -1,0 +1,28 @@
+.navbar {
+    background-color: #F3E9F1;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    margin-bottom: 50px;;
+}
+
+#camList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.camBox {
+    border: 1px solid black;
+    width: 302px;
+    margin-bottom: 30px;
+}
+.imgBox {
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
