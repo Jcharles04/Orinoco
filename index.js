@@ -30,7 +30,7 @@ function cameraBuilder(cameraJson) {
     camTitle.classList.add('camTitle');
 
     let name = document.createElement('h3')
-    name.innerHTML += cameraJson.name    
+    name.innerHTML += cameraJson.name;    
 
     let desc = document.createElement('p');
     desc.innerHTML += cameraJson.description;
@@ -38,10 +38,10 @@ function cameraBuilder(cameraJson) {
     let price = document.createElement('p');
     price.innerHTML += (parseInt(cameraJson.price) / 100).toFixed(2) + ' €';
 
-    camTitle.appendChild(name);
+    camList.appendChild(camBox);
     camBox.appendChild(imgBox);
     camBox.appendChild(camTitle);
-    camBox.appendChild(desc);
-    camBox.appendChild(price);
-    camList.appendChild(camBox);
+    camTitle.appendChild(name);
+    camTitle.appendChild(desc);
+    camTitle.appendChild(price);
 }
