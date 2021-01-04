@@ -21,13 +21,16 @@ function cameraBuilder(cameraJson) {
     let camBox = document.createElement('div');
     camBox.classList.add('camBox');
     camBox.id = cameraJson._id;
+    
+    let camLink = document.createElement('a');
+    camLink.href = 'product.html?id=' + cameraJson._id + '';
 
     let imgBox = document.createElement('div');
     imgBox.classList.add('imgBox');
     imgBox.style.backgroundImage = 'url(' + cameraJson.imageUrl + ')';
 
     let camTitle = document.createElement('div');
-    camTitle.classList.add('camTitle');
+    camTitle.classList.add('camForm');
 
     let name = document.createElement('h3')
     name.innerHTML += cameraJson.name;    
@@ -39,9 +42,11 @@ function cameraBuilder(cameraJson) {
     price.innerHTML += (parseInt(cameraJson.price) / 100).toFixed(2) + ' €';
 
     camList.appendChild(camBox);
+    camBox.appendChild(camLink);
     camBox.appendChild(imgBox);
     camBox.appendChild(camTitle);
     camTitle.appendChild(name);
     camTitle.appendChild(desc);
     camTitle.appendChild(price);
 }
+

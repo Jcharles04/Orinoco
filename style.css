@@ -19,6 +19,13 @@
     width: 252px;
     margin-bottom: 30px;
 }
+
+.camBox > a {
+    display: flex;
+    width: 252px;
+    height: 252px;
+}
+
 .imgBox {
     width: 250px;
     height: 250px;
