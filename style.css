@@ -21,9 +21,9 @@
 }
 
 .camBox > a {
-    display: flex;
-    width: 252px;
-    height: 252px;
+    position: absolute;
+    width: 250px;
+    height: 445px;
 }
 
 .imgBox {
@@ -32,4 +32,23 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+#actualProduct > .box {
+    display: flex;
+    flex-direction: row;
+}
+
+#actualProduct > .box > .camForm {
+    width: 55%;
+    margin-left: 3rem;
+}
+
+li {
+    list-style-type: none;
+}
+
+#addToBasket {
+    margin-top: 5rem; 
+    
 }
