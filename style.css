@@ -48,7 +48,25 @@ li {
     list-style-type: none;
 }
 
+label {
+    display: flex;
+
+}
+
 #addToBasket {
     margin-top: 5rem; 
     
+}
+.basketBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.miniImg {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

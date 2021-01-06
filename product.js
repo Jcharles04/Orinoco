@@ -1,4 +1,3 @@
-let camera;
 let productDetail = document.getElementById('actualProduct');
 
 const params = (new URL(document.location)).searchParams;
@@ -28,18 +27,29 @@ function productBuilder(productJson) {
     let camTitle = document.createElement('div');
     camTitle.classList.add('camForm');
 
-    let name = document.createElement('h3')
+    let name = document.createElement('h3');
     name.innerHTML += productJson.name;   
     
-    let lense = document.createElement('label')
-    lense.textContent = 'Nous vous proposons un choix de lentilles selon vos envies :';
+    let lense = document.createElement('form');
+    lense.setAttribute("name", "lense");
+    lense.setAttribute("id", "form")
+    lense.setAttribute("action", "")
+    lense.textContent = 'Choisissez votre lentille :' + ' ';
+
+    let choise = document.createElement('select');
+    choise.setAttribute('name', 'lense');
+    choise.setAttribute('id', 'choiseBox');
+    choise.setAttribute('required',"required");
+    choise.innerHTML = '<option value=""> (Sélectionner) </option>';
+
 
     let lenses = productJson.lenses;
     for (var i = 0; i < lenses.length; i++) {
-        var lenseList = document.createElement('select');
-        lenses.innerHTML = "name="+lenses[i];
-        lenseList.textContent ="-" + " " +lenses[i];
-        lense.appendChild(lenseList);
+        var lenseList = document.createElement('option');
+        lenseList.setAttribute('value',lenses[i]);
+        lenseList.setAttribute("name", lenses[i])
+        lenseList.textContent =" " + " " +lenses[i];
+        choise.appendChild(lenseList);
     }
         
 
@@ -56,8 +66,36 @@ function productBuilder(productJson) {
     camTitle.appendChild(name);
     camTitle.appendChild(desc);
     camTitle.appendChild(lense);
+    lense.appendChild(choise);
     camTitle.appendChild(price);
 }
 
     
-let basket = document.getElementById('addToBasket')
+let basket = document.getElementById('addToBasket');
+
+var validation = [];
+
+basket.addEventListener('click', function(storage) {
+
+    let testStorage ;
+    if(choiseBox.value === "") {
+        alert("Vous n'avez pas séléctionné de lentille");
+    }else {
+        let basketJson = {
+        img: product.imageUrl,
+        name: product.name,
+        _id: product._id,
+        lenses: choiseBox.value,
+        price: product.price
+    }
+    let basketLinea = JSON.stringify(basketJson);
+    localStorage.setItem("basket",basketLinea);
+
+    }
+})
+
+
+
+
+    
+
