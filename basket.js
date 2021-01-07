@@ -1,34 +1,47 @@
-let basketDetail = document.getElementById('basketList');
+window.addEventListener('load', loadevent => {
 
-let basketLinea = localStorage.getItem("basket");
-let basketJson = JSON.parse(basketLinea);
-basketBuilder(basketJson);
+    let basketDetail = document.getElementById('basketList');
 
-function basketBuilder(basketLinea) {
+    let basketLinea = localStorage.getItem("basket");
+    let basketJson = JSON.parse(basketLinea);
+    
+    for (let i = 0; i < basketJson.length; i++) {
+        product = basketJson[i];
+        basketBuilder(product);
+    }
+    
+    function basketBuilder(product) {
 
-    let basketBox = document.createElement('div');
-    basketBox.classList.add('basketBox');
+        let basketBox = document.createElement('div');
+        basketBox.classList.add('basketBox');
 
-    let miniImg = document.createElement('div');
-    miniImg.classList.add('miniImg');
-    miniImg.style.backgroundImage = 'url(' + basketLinea.img + ')';
+        let miniImg = document.createElement('div');
+        miniImg.classList.add('miniImg');
+        miniImg.style.backgroundImage = 'url(' + product.img + ')';
 
-    let productName = document.createElement('div');
-    productName.classList.add('name');
-    productName.innerHTML += basketLinea.name;
+        let productName = document.createElement('div');
+        productName.classList.add('name');
+        productName.innerHTML += product.name;
 
-    let productLense = document.createElement('div');
-    productLense.classList.add('lense');
-    productLense.innerHTML += basketLinea.lenses;
+        let productLense = document.createElement('div');
+        productLense.classList.add('lense');
+        productLense.innerHTML += product.lenses;
 
-    let productPrice = document.createElement('div');
-    productPrice.classList.add('price');
-    productPrice.innerHTML += (parseInt(basketLinea.price) / 100).toFixed(2) + ' €';
+        let productPrice = document.createElement('div');
+        productPrice.classList.add('price');
+        productPrice.innerHTML += convert(product.price/100)
 
-    basketList.appendChild(basketBox);
-    basketBox.appendChild(miniImg);
-    basketBox.appendChild(productName);
-    basketBox.appendChild(productLense);
-    basketBox.appendChild(productPrice);
+        basketList.appendChild(basketBox);
+        basketBox.appendChild(miniImg);
+        basketBox.appendChild(productName);
+        basketBox.appendChild(productLense);
+        basketBox.appendChild(productPrice);
 
-}   
+    }  
+});
+
+function convert(number){
+    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'/*, minimumFractionDigits: 2, maximumFractionDigits: 2*/})
+}
+
+    
