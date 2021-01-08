@@ -1,0 +1,38 @@
+classe Panier
+  public data: toutes les lignes en JSON
+  public total: montant total
+  privé nLigneMax: numéro de ligne max utilisé
+  etc. (autres états)
+
+  constructeur: (= new Panier())
+    charger depuis localStorage en JSON -> parse -> stocker dans data
+    si pas dans localStorage, data = []
+    calculerPanier (mettre à jour total, nLigneMax, etc.)
+
+  privé enregistrer:
+    data -> toJSON -> localStorage
+
+  public ajouterLigne(code, libellé, lentille, prixU, qté):
+    lgn = générer l'objet ligne
+    lgn.nLigne = ++nLigneMax
+    calculerLigne(lgn)
+    data.push(lgn)
+    calculerPanier
+    enregistrer
+
+  public changerQté(nLigne, qté):
+    boucle sur lignes dans data:
+      chercher ligne lgn avec lgn=nLigne
+    lgn.qté = qté
+    calculerLigne(lgn)
+    calculerPanier
+    enregistrer
+
+  privé calculerLigne(lgn):
+    lgn.montantTotal = lgn.prixU * lgn.qté
+    
+  privé calculerPanier:
+    boucle sur lignes dans data:
+      additionner montants lignes -> total
+      chercher le max des nLigne -> nLigneMax
+      etc.

@@ -27,6 +27,20 @@ window.addEventListener('load', loadevent => {
         productLense.classList.add('lense');
         productLense.innerHTML += product.lenses;
 
+        let adjusment = document.createElement('div');
+        adjusment.classList.add('boxPM');
+
+        let menosButton = document.createElement('button');
+        menosButton.classList.add('button','mini');
+        menosButton.textContent ='-';
+
+        let number = document.createElement('div');
+        number.classList.createElement('number');
+    
+        let plusButton = document.createElement('button');
+        plusButton.classList.add('button','mini');
+        plusButton.textContent ='+';
+
         let productPrice = document.createElement('div');
         productPrice.classList.add('price');
         productPrice.innerHTML += convert(product.price/100)
@@ -35,6 +49,9 @@ window.addEventListener('load', loadevent => {
         basketBox.appendChild(miniImg);
         basketBox.appendChild(productName);
         basketBox.appendChild(productLense);
+        basketBox.appendChild(adjusment);
+        adjusment.appendChild(menosButton);
+        adjusment.appendChild(plusButton);
         basketBox.appendChild(productPrice);
 
     }  

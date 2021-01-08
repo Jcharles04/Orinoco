@@ -70,3 +70,13 @@ label {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.boxPM {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mini {
+    width: 25px;
+    height: 25px;
+}
