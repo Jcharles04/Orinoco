@@ -94,6 +94,7 @@ window.addEventListener('load', loadevent => {
             let basket = localStorage.getItem("basket");
             if (!basket) {
                 basket = [];
+
             } else {
                 basket = JSON.parse(basket);
             }
@@ -105,13 +106,13 @@ window.addEventListener('load', loadevent => {
                 lenses: choiseBox.value,
                 price: product.price
             }
+
             basket.push(basketJson);
 
             let basketLinea = JSON.stringify(basket);
             localStorage.setItem("basket", basketLinea);
-        }
 
-        return false;
+        }
     }
 
 });

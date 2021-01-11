@@ -34,8 +34,8 @@ window.addEventListener('load', loadevent => {
         menosButton.classList.add('button','mini');
         menosButton.textContent ='-';
 
-        let number = document.createElement('div');
-        number.classList.createElement('number');
+        /*let number = document.createElement('div');
+        number.classList.createElement('number');*/
     
         let plusButton = document.createElement('button');
         plusButton.classList.add('button','mini');
