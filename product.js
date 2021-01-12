@@ -118,5 +118,5 @@ window.addEventListener('load', loadevent => {
 });
 
 function convert(number){
-    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'/*, minimumFractionDigits: 2, maximumFractionDigits: 2*/})
+    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
 }
