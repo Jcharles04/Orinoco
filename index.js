@@ -1,31 +1,30 @@
-window.addEventListener('load', loadevent => {
+window.addEventListener('load', loadevent => {                  // on met notre JS dans un scope en attendant que la page HTML soit chargée
 
-    const cameraUrl = 'http://localhost:3000/api/cameras/';
+    const cameraUrl = 'http://localhost:3000/api/cameras/';     //on prépare notre URL pour le fetch
+    let camList = document.getElementById('camList');           //on vient pointer notre elemennt HTMl pour la suite 
 
-    let camList = document.getElementById('camList');
-
-    fetch(cameraUrl)
-        .then(async result => {
-            const cameras = await result.json();
-            let resultLength = cameras.length;
-            for (let i = 0; i < resultLength; i++) {
-                const camera = cameras[i];
-                cameraBuilder(camera);
+    fetch(cameraUrl)                                            //on envoi une requête à notre API 
+        .then(async result => {                                 //on attend le resultat en async
+            const cameras = await result.json();                //on déclare notre constante avec notre promisse de Json
+            let resultLength = cameras.length;                  //déclaration de variable
+            for (let i = 0; i < resultLength; i++) {            //On créé une boucle qui se répéte pour chaque ligne du JSON
+                const camera = cameras[i];                      
+                cameraBuilder(camera);                          //On déclare notre builder
             }
         })
-        .catch(error => {
+        .catch(error => {                                       //on catch les erreurs si on e trouve pas nos API
             alert('Error API!');
             console.log(error);
         })
 
-    function cameraBuilder(cameraJson) {
+    function cameraBuilder(cameraJson) {                        //Fonction builder, le template se répéte pour chaque produit de notre Json
         
         let camBox = document.createElement('div');
         camBox.classList.add('camBox');
         camBox.id = cameraJson._id;
         
         let camLink = document.createElement('a');
-        camLink.href = 'product.html?id=' + cameraJson._id + '';
+        camLink.href = 'product.html?id=' + cameraJson._id + ''; //au click on se déplace vers la page "Produit" avec l'id du produit dont on va se reservir plus tard
 
         let imgBox = document.createElement('div');
         imgBox.classList.add('imgBox');
@@ -43,7 +42,7 @@ window.addEventListener('load', loadevent => {
         let price = document.createElement('p');
         price.innerHTML += convert(cameraJson.price/100);
 
-        camList.appendChild(camBox);
+        camList.appendChild(camBox);                            //on déclare nos liens de parenté
         camBox.appendChild(camLink);
         camBox.appendChild(imgBox);
         camBox.appendChild(camTitle);
@@ -54,5 +53,5 @@ window.addEventListener('load', loadevent => {
 });
 
 function convert(number){
-    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'/*, minimumFractionDigits: 2, maximumFractionDigits: 2*/})
+    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})  //Petite fonction pour donner le prix en euros
 }

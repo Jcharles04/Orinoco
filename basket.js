@@ -1,29 +1,21 @@
 window.addEventListener('load', loadevent => {
 
-    let basketDetail = document.getElementById('basketList');
-
-    
-
     let basketLinea = localStorage.getItem("basket");
     let basketJson = JSON.parse(basketLinea);
     
     let total = 0;
     let sum = document.getElementById('sum');
-    
-
+    pId = [];
     
 
     for (let i = 0; i < basketJson.length; i++) {
         product = basketJson[i];
         total += product.price;
+        pId.push(product._id);
         basketBuilder(product);
         sum.innerHTML = 'Total :'+ ' ' + convert(total/100);
     }
     
-    
-    
-    
-
     function basketBuilder(product) {
 
         let basketBox = document.createElement('div');
@@ -41,20 +33,6 @@ window.addEventListener('load', loadevent => {
         productLense.classList.add('lense');
         productLense.innerHTML += product.lenses;
 
-        /*let adjusment = document.createElement('div');
-        adjusment.classList.add('boxPM');
-
-        let menosButton = document.createElement('button');
-        menosButton.classList.add('button','mini');
-        menosButton.textContent ='-';
-
-        let number = document.createElement('div');
-        number.classList.createElement('number');
-    
-        let plusButton = document.createElement('button');
-        plusButton.classList.add('button','mini');
-        plusButton.textContent ='+';*/
-
         let productPrice = document.createElement('div');
         productPrice.classList.add('price');
         productPrice.innerHTML += convert(product.price/100);
@@ -67,52 +45,83 @@ window.addEventListener('load', loadevent => {
 
     }
 
-    
+    const lastName = document.getElementById('lastName');
+    const firstName = document.getElementById('firstName');
+    const address = document.getElementById('address');
+    const city = document.getElementById('city');
+    const email = document.getElementById('email');
+
 
     let orderForm = document.getElementById('form');
-    orderForm.addEventListener('submit', () => {
+    orderForm.addEventListener('submit', orderVal)
 
-        const lastName = document.getElementById('lastName');
-        const firstName = document.getElementById('firstName');
-        const address = document.getElementById('address');
-        const city = document.getElementById('city');
-        const email = document.getElementById('email');
+    function orderVal(ev) {
+        ev.preventDefault();
 
-        let order = {
-            contact: { 
-                firstName: firstName.value,
-                lastName: lastName.value,
-                address: address.value,
-                city: city.value,
-                email: email.value,
-            },
-            products: [product._id]
+        let ord = ev.target;
+        if (ord.checkValidity()) {
+            console.log("Form valid");
         }
-        order.push(products)
+            let order = localStorage.getItem("orderSon");
+            if (!order) {
+                order = [];
+
+            } else {
+                order = JSON.parse(order);
+            }
 
 
-        fetch("http://localhost:3000/api/cameras/order", {
-            method: "POST",
-            headers: {"Content-type": "application/json;charset=UTF-8"},
-            body: JSON.stringify(order)
-        })
-        .then(async result_ => {
-            const result = await result_.json() 
-            window.localStorage.setItem("order", JSON.stringify(order))
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        alert(`Commande prise en compte. Merci de votre achat !`)      
-    })
-        
-    
-
-    
+            const orderSon = {
+                contact: { 
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    address: address.value,
+                    city: city.value,
+                    email: email.value,
+                },
+                products : pId,
 
 
+            }
+            order.push(orderSon);
+            window.localStorage.setItem("order", JSON.stringify(orderSon))
 
-    
+            fetch("http://localhost:3000/api/cameras/order", {
+                method: "POST",
+                headers: {"Content-type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(orderSon),
+            })  
+                .then(async result_ => {
+                    const result = await result_.json()
+                    window.localStorage.setItem("orderResult", JSON.stringify(result.orderId))  
+                })
+                .catch(error => {
+                    onsole.log(error);
+                })
+            /*.then(function(response) {
+                if(response.ok) {
+                response.blob().then(function() { 
+
+                    alert("Votre commande a été passé avec succés");
+                    console.log(response)
+                    console.log(blob)
+                });
+                } else {
+                console.log('Mauvaise réponse du réseau');
+                }
+                })
+            .catch(function(error) {
+                console.log('Il y a eu un problème avec l\'opération fetch');
+            })*/
+
+            const answer = window.confirm("Votre commande a bien été enregistré, vous allez être redirigé.");
+            if (answer) {
+                window.location.href ="order.html"
+            } else {
+                window.location.href = "index.html"
+            }
+    }
+
 });
 
 
@@ -120,13 +129,3 @@ window.addEventListener('load', loadevent => {
 function convert(number){
     return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
 }
-
-/*Expects request to contain:
- * contact: {
- *   firstName: string,
- *   lastName: string,
- *   address: string,
- *   city: string,
- *   email: string
- * }
- * products: [string] <-- array of product _id*/
