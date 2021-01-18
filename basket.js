@@ -83,10 +83,40 @@ window.addEventListener('load', loadevent => {
 
 
             }
-            order.push(orderSon);
-            window.localStorage.setItem("order", JSON.stringify(orderSon))
+            /*order.push(orderSon);
+            window.localStorage.setItem("order", JSON.stringify(orderSon))*/
 
             fetch("http://localhost:3000/api/cameras/order", {
+                    method: "POST",
+                    headers: {"Content-type": "application/json;charset=UTF-8"},
+                    body: JSON.stringify(orderSon),
+                })  
+                .then(async result_ => {
+                    if (result_.ok) {
+                        try {
+                            const result = await result_.json();
+                            window.localStorage.setItem("orderResult", JSON.stringify(result.orderId));
+                            order.push(orderSon);
+                            window.localStorage.setItem("order", JSON.stringify(orderSon));
+                            window.localStorage.setItem("total", JSON.stringify(total));
+                            const answer = window.confirm("Votre commande a bien été enregistré, vous allez être redirigé.");
+                                if (answer) {
+                                    window.location.href ="order.html";
+                                } else {
+                                    window.location.href = "#";
+                                }
+                        } catch (err) {
+                            window.alert("Erreur de traitement de la réponse:\n" + err);
+                        }
+                    } else {
+                        window.alert("Erreur de communication:\n" + result_.status + " - " + result_.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+            /*fetch("http://localhost:3000/api/cameras/order", {
                 method: "POST",
                 headers: {"Content-type": "application/json;charset=UTF-8"},
                 body: JSON.stringify(orderSon),
@@ -96,7 +126,7 @@ window.addEventListener('load', loadevent => {
                     window.localStorage.setItem("orderResult", JSON.stringify(result.orderId))  
                 })
                 .catch(error => {
-                    onsole.log(error);
+                    console.log(error);
                 })
             /*.then(function(response) {
                 if(response.ok) {
@@ -114,12 +144,12 @@ window.addEventListener('load', loadevent => {
                 console.log('Il y a eu un problème avec l\'opération fetch');
             })*/
 
-            const answer = window.confirm("Votre commande a bien été enregistré, vous allez être redirigé.");
+            /*const answer = window.confirm("Votre commande a bien été enregistré, vous allez être redirigé.");
             if (answer) {
                 window.location.href ="order.html"
             } else {
                 window.location.href = "index.html"
-            }
+            }*/
     }
 
 });
