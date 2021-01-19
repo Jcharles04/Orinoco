@@ -18,30 +18,37 @@ window.addEventListener('load', loadevent => {
 
     function productBuilder(productJson) {                                         //builder 
 
-        let camBox = document.createElement('div');
-        camBox.classList.add('box');
+        let imgBox = document.getElementById('imgBox');
 
-        let imgBox = document.createElement('div');
-        imgBox.classList.add('imgBox');
-        imgBox.style.backgroundImage = 'url(' + productJson.imageUrl + ')';
+        let img = document.createElement('img');
+        img.classList.add('productImg')
+        img.setAttribute('src',productJson.imageUrl);
 
-        let camTitle = document.createElement('div');
-        camTitle.classList.add('camForm');
+        let camTitle = document.getElementById('cardDesc');
+
+        let cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
 
         let name = document.createElement('h3');
+        name.classList.add('card-title');
         name.innerHTML += productJson.name;   
         
         let lense = document.createElement('form');                                 //on créé un form dans le html, pour povoir utiliser un required plus tard
         lense.setAttribute("name", "form");
-        lense.setAttribute("id", "form")
-        lense.setAttribute("action", "")
-        lense.textContent = 'Choisissez votre lentille :' + ' ';
+        lense.setAttribute("id", "form");
+        lense.setAttribute("action", "");
+
+        let label = document.createElement('label');
+        label.classList.add('form-label');
+        label.setAttribute('for', 'choiseBox');
+        label.innerText = "Choisissez votre lentille :"
 
         let choise = document.createElement('select');                              //on créé les option du menu déroulant 
         choise.setAttribute('name', 'lense');
         choise.setAttribute('id', 'choiseBox');
+        choise.setAttribute('class', 'form-control');
         choise.setAttribute('required',"required");                                 //on vérifie qu'un champ a bien été séléctionné
-        choise.innerHTML = '<option value=""> (Sélectionner) </option>';
+        choise.innerHTML = '<option value=""> Sélectionner </option>';
 
 
         let lenses = productJson.lenses;                                            //on déclare notre variable lenses et on créé une boucle pour chaque lense
@@ -53,27 +60,30 @@ window.addEventListener('load', loadevent => {
             choise.appendChild(lenseList);
         }
             
-
         let desc = document.createElement('p');
+        desc.classList.add('card-text');
         desc.innerHTML += productJson.description;
 
         let price = document.createElement('p');
+        price.classList.add('card-text');
         price.innerHTML += convert(productJson.price/100)
 
-        let submit = document.createElement('button');                                 //boutton submit de notre form
+        let submit = document.createElement('button');                                //boutton submit de notre form
+        submit.classList.add('btn');
+        submit.classList.add('btn-success');
         submit.setAttribute('id','addToBasket');
         submit.setAttribute('type','submit');
         submit.textContent=" " + 'Ajouter au panier';
 
 
-        actualProduct.appendChild(camBox);
-        camBox.appendChild(imgBox);
-        camBox.appendChild(camTitle);
-        camTitle.appendChild(name);
-        camTitle.appendChild(desc);
-        camTitle.appendChild(lense);
+        imgBox.appendChild(img);
+        camTitle.appendChild(cardBody);
+        cardBody.appendChild(name);
+        cardBody.appendChild(desc);
+        cardBody.appendChild(price);
+        cardBody.appendChild(lense);
+        lense.appendChild(label);
         lense.appendChild(choise);
-        camTitle.appendChild(price);
         lense.appendChild(submit);
         
         let frm = document.getElementById('form');

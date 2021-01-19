@@ -2,7 +2,8 @@ window.addEventListener('load', loadevent => {
 
     let basketLinea = localStorage.getItem("basket");
     let basketJson = JSON.parse(basketLinea);
-    
+    let basketList = document.getElementById('array');
+
     let total = 0;
     let sum = document.getElementById('sum');
     pId = [];
@@ -13,30 +14,32 @@ window.addEventListener('load', loadevent => {
         total += product.price;
         pId.push(product._id);
         basketBuilder(product);
-        sum.innerHTML = 'Total :'+ ' ' + convert(total/100);
+        sum.innerHTML = convert(total/100);
     }
     
     function basketBuilder(product) {
 
-        let basketBox = document.createElement('div');
+        let basketBox = document.createElement('tr');
         basketBox.classList.add('basketBox');
+        basketBox.classList.add('col-8');  
 
-        let miniImg = document.createElement('div');
+        let miniImg = document.createElement('td');
         miniImg.classList.add('miniImg');
         miniImg.style.backgroundImage = 'url(' + product.img + ')';
 
-        let productName = document.createElement('div');
+        let productName = document.createElement('td');
         productName.classList.add('name');
         productName.innerHTML += product.name;
 
-        let productLense = document.createElement('div');
+        let productLense = document.createElement('td');
         productLense.classList.add('lense');
         productLense.innerHTML += product.lenses;
 
-        let productPrice = document.createElement('div');
+        let productPrice = document.createElement('td');
         productPrice.classList.add('price');
         productPrice.innerHTML += convert(product.price/100);
 
+        
         basketList.appendChild(basketBox);
         basketBox.appendChild(miniImg);
         basketBox.appendChild(productName);

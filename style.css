@@ -1,42 +1,17 @@
-html {
-    width : 100%;
-    height : 100%;
+*{
+    margin: 0;
+    padding: 0;
 }
-
-
+main {
+    margin-bottom: 150px;
+}
 
 .navbar {
     background-color: #F3E9F1;
     margin-bottom: 50px;
 }
 
-.section-title {
-    margin-bottom: 50px;
-}
-
-#camList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.camBox {
-    border: 1px solid black;
-    width: 252px;
-    margin-bottom: 50px;
-}
-
-.camBox > a {
-    position: absolute;
-    width: 250px;
-    height: 445px;
-}
-.camForm {
-    padding: .5em .5em;
-}
-
-.imgBox {
+.card-img-top {
     width: 250px;
     height: 250px;
     background-position: center;
@@ -44,62 +19,55 @@ html {
     background-repeat: no-repeat;
 }
 
-#actualProduct > .box {
-    display: flex;
-    flex-direction: row;
-}
-
-#actualProduct > .box > .camForm {
-    width: 55%;
-    margin-left: 3rem;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: auto;
-}
-
-
-
-
-
-
-
-#addToBasket {
-    margin-top: 5rem; 
-    
-}
-.basketBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.miniImg {
-    width: 100px;
-    height: 100px;
+.productImg {
+    width: 100%;
+    height: auto;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.boxPM {
-    display: flex;
-    justify-content: space-around;
+#choiseBox {
+    width: 33%;
+    margin-bottom: 20px;
 }
 
-.mini {
-    width: 25px;
-    height: 25px;
+table {
+    text-align: center;
+    vertical-align: middle;
 }
+
+.basketBox {
+    vertical-align: middle;
+}
+
+.miniImg {
+   height: 100px;
+   width : 148px;
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+
+.order {
+    padding: 50px;
+}
+
+#finalPage {
+    margin: 100px 50px;
+}
+
 /*    FOOTER     */
 
 footer {
-    background-color:#F3E9F1 ;
+    margin-top: 20px;
+    background-color:#F3E9F1;
+    bottom:0;
+    position: fixed;
+    width: 100%;
 }
+
 .social {
     font-size: 30px;
-    color: #198754;
+    color: #198754 ;
 }

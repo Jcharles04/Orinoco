@@ -7,10 +7,10 @@ window.addEventListener('load', loadevent => {
     console.log(total);
 
     let num = document.getElementById('num');
-    num.textContent = "Votre numéro de commande est le :" + ord;
+    num.textContent = /*"Votre numéro de commande est le :" +*/ ord;
 
     let price = document.getElementById('price');
-    price.textContent = "Le total de votre commande est de :" +" "+ convert(total/100);
+    price.textContent =convert(total/100);
 
 
 

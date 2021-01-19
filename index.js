@@ -17,38 +17,49 @@ window.addEventListener('load', loadevent => {                  // on met notre 
             console.log(error);
         })
 
-    function cameraBuilder(cameraJson) {                        //Fonction builder, le template se répéte pour chaque produit de notre Json
+    function cameraBuilder(cameraJson) {                                                //Fonction builder, le template se répéte pour chaque produit de notre Json
+        
         
         let camBox = document.createElement('div');
-        camBox.classList.add('camBox');
+        camBox.classList.add('card');
+        camBox.classList.add('col-sm-12');
+        camBox.classList.add('col-md-6');
+        camBox.classList.add('col-lg-4');
         camBox.id = cameraJson._id;
         
-        let camLink = document.createElement('a');
-        camLink.href = 'product.html?id=' + cameraJson._id + ''; //au click on se déplace vers la page "Produit" avec l'id du produit dont on va se reservir plus tard
-
-        let imgBox = document.createElement('div');
-        imgBox.classList.add('imgBox');
-        imgBox.style.backgroundImage = 'url(' + cameraJson.imageUrl + ')';
+        let imgBox = document.createElement('img');
+        imgBox.classList.add('card-img-top');
+        imgBox.setAttribute('src',cameraJson.imageUrl);
 
         let camTitle = document.createElement('div');
-        camTitle.classList.add('camForm');
+        camTitle.classList.add('card-body');
 
-        let name = document.createElement('h3')
+        let name = document.createElement('h3');
+        name.classList.add('card-title');
         name.innerHTML += cameraJson.name;    
 
         let desc = document.createElement('p');
+        desc.classList.add('card-text');
         desc.innerHTML += cameraJson.description;
 
         let price = document.createElement('p');
+        price.classList.add('card-text');
         price.innerHTML += convert(cameraJson.price/100);
 
+        let camLink = document.createElement('a');
+        camLink.classList.add('btn');
+        camLink.classList.add('btn-success');
+        camLink.innerText = 'Détails';
+        camLink.href = 'product.html?id=' + cameraJson._id + ''; //au click on se déplace vers la page "Produit" avec l'id du produit dont on va se reservir plus tard
+
+
         camList.appendChild(camBox);                            //on déclare nos liens de parenté
-        camBox.appendChild(camLink);
         camBox.appendChild(imgBox);
         camBox.appendChild(camTitle);
         camTitle.appendChild(name);
         camTitle.appendChild(desc);
         camTitle.appendChild(price);
+        camTitle.appendChild(camLink);
     }
 });
 
