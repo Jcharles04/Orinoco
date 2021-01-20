@@ -1,32 +1,33 @@
+'use strict';
+
 window.addEventListener('load', loadevent => {
 
     let ord = localStorage.getItem("orderResult");
-    console.log(ord);
 
     let total = localStorage.getItem("total");
-    console.log(total);
 
     let num = document.getElementById('num');
-    num.textContent = /*"Votre numéro de commande est le :" +*/ ord;
+    num.textContent =  ord;
 
     let price = document.getElementById('price');
-    price.textContent =convert(total/100);
+    price.textContent =convertEuro(total/100);
+
+    let home = document.getElementById('clear');
+    home.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        location.href = "index.html"
+    });
 
 
 
+
+    function convertEuro(number){
+        return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
+    };
 
     
-
-
-    
-
+});
 
 
 
-
-
-})
-
-function convert(number){
-    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
-}

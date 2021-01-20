@@ -1,4 +1,4 @@
-classe Panier
+{classe Panier
   public data: toutes les lignes en JSON
   public total: montant total
   privé nLigneMax: numéro de ligne max utilisé
@@ -35,4 +35,4 @@ classe Panier
     boucle sur lignes dans data:
       additionner montants lignes -> total
       chercher le max des nLigne -> nLigneMax
-      etc.
+      etc.}

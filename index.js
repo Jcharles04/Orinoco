@@ -1,3 +1,5 @@
+'use strict';
+
 window.addEventListener('load', loadevent => {                  // on met notre JS dans un scope en attendant que la page HTML soit chargée
 
     const cameraUrl = 'http://localhost:3000/api/cameras/';     //on prépare notre URL pour le fetch
@@ -15,9 +17,9 @@ window.addEventListener('load', loadevent => {                  // on met notre 
         .catch(error => {                                       //on catch les erreurs si on e trouve pas nos API
             alert('Error API!');
             console.log(error);
-        })
+        });
 
-    function cameraBuilder(cameraJson) {                                                //Fonction builder, le template se répéte pour chaque produit de notre Json
+    function cameraBuilder(cameraJson) {                         //Fonction builder, le template se répéte pour chaque produit de notre Json
         
         
         let camBox = document.createElement('div');
@@ -44,7 +46,7 @@ window.addEventListener('load', loadevent => {                  // on met notre 
 
         let price = document.createElement('p');
         price.classList.add('card-text');
-        price.innerHTML += convert(cameraJson.price/100);
+        price.innerHTML += convertEuro(cameraJson.price/100);
 
         let camLink = document.createElement('a');
         camLink.classList.add('btn');
@@ -60,9 +62,11 @@ window.addEventListener('load', loadevent => {                  // on met notre 
         camTitle.appendChild(desc);
         camTitle.appendChild(price);
         camTitle.appendChild(camLink);
-    }
+    };
+
+    function convertEuro(number){
+        return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})  //Petite fonction pour donner le prix en euros
+    };
+    
 });
 
-function convert(number){
-    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})  //Petite fonction pour donner le prix en euros
-}

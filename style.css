@@ -12,8 +12,8 @@ main {
 }
 
 .card-img-top {
-    width: 250px;
-    height: 250px;
+    max-width: 100%;
+    height: auto;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -32,6 +32,10 @@ main {
     margin-bottom: 20px;
 }
 
+.form-label {
+    display: flex;
+}
+
 table {
     text-align: center;
     vertical-align: middle;
@@ -42,13 +46,15 @@ table {
 }
 
 .miniImg {
-   height: 100px;
-   width : 148px;
-   background-position: center;
-   background-size: cover;
-   background-repeat: no-repeat;
+    max-width: 100%;
+    height: auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-
+#sum {
+    font-weight: 700;
+}
 .order {
     padding: 50px;
 }

@@ -1,20 +1,23 @@
+'use strict';
+
 window.addEventListener('load', loadevent => {
 
-    let basketLinea = localStorage.getItem("basket");
-    let basketJson = JSON.parse(basketLinea);
+    let product;
     let basketList = document.getElementById('array');
 
     let total = 0;
     let sum = document.getElementById('sum');
-    pId = [];
-    
+    let pId = [];
+
+    let basketLinea = localStorage.getItem("basket");
+    let basketJson = JSON.parse(basketLinea);
 
     for (let i = 0; i < basketJson.length; i++) {
         product = basketJson[i];
         total += product.price;
         pId.push(product._id);
         basketBuilder(product);
-        sum.innerHTML = convert(total/100);
+        sum.innerHTML = convertEuro(total/100);
     }
     
     function basketBuilder(product) {
@@ -37,7 +40,7 @@ window.addEventListener('load', loadevent => {
 
         let productPrice = document.createElement('td');
         productPrice.classList.add('price');
-        productPrice.innerHTML += convert(product.price/100);
+        productPrice.innerHTML += convertEuro(product.price/100);
 
         
         basketList.appendChild(basketBox);
@@ -56,7 +59,7 @@ window.addEventListener('load', loadevent => {
 
 
     let orderForm = document.getElementById('form');
-    orderForm.addEventListener('submit', orderVal)
+    orderForm.addEventListener('submit', orderVal);
 
     function orderVal(ev) {
         ev.preventDefault();
@@ -68,11 +71,9 @@ window.addEventListener('load', loadevent => {
             let order = localStorage.getItem("orderSon");
             if (!order) {
                 order = [];
-
             } else {
                 order = JSON.parse(order);
             }
-
 
             const orderSon = {
                 contact: { 
@@ -83,11 +84,7 @@ window.addEventListener('load', loadevent => {
                     email: email.value,
                 },
                 products : pId,
-
-
-            }
-            /*order.push(orderSon);
-            window.localStorage.setItem("order", JSON.stringify(orderSon))*/
+            };
 
             fetch("http://localhost:3000/api/cameras/order", {
                     method: "POST",
@@ -117,48 +114,14 @@ window.addEventListener('load', loadevent => {
                 })
                 .catch(error => {
                     console.log(error);
-                })
-
-            /*fetch("http://localhost:3000/api/cameras/order", {
-                method: "POST",
-                headers: {"Content-type": "application/json;charset=UTF-8"},
-                body: JSON.stringify(orderSon),
-            })  
-                .then(async result_ => {
-                    const result = await result_.json()
-                    window.localStorage.setItem("orderResult", JSON.stringify(result.orderId))  
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-            /*.then(function(response) {
-                if(response.ok) {
-                response.blob().then(function() { 
-
-                    alert("Votre commande a été passé avec succés");
-                    console.log(response)
-                    console.log(blob)
                 });
-                } else {
-                console.log('Mauvaise réponse du réseau');
-                }
-                })
-            .catch(function(error) {
-                console.log('Il y a eu un problème avec l\'opération fetch');
-            })*/
 
-            /*const answer = window.confirm("Votre commande a bien été enregistré, vous allez être redirigé.");
-            if (answer) {
-                window.location.href ="order.html"
-            } else {
-                window.location.href = "index.html"
-            }*/
-    }
+    };
 
+    function convertEuro(number){
+        return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
+    };
 });
 
 
 
-function convert(number){
-    return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
-}

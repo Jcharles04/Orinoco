@@ -1,6 +1,8 @@
+'use strict';
+
 window.addEventListener('load', loadevent => {
 
-
+    let product;
     const params = (new URL(document.location)).searchParams;                   //on isole l'id pour pouvoir retrouver la bonne caméra dans la liste
     const id = params.get('id');
 
@@ -21,7 +23,7 @@ window.addEventListener('load', loadevent => {
         let imgBox = document.getElementById('imgBox');
 
         let img = document.createElement('img');
-        img.classList.add('productImg')
+        img.classList.add('productImg');
         img.setAttribute('src',productJson.imageUrl);
 
         let camTitle = document.getElementById('cardDesc');
@@ -41,7 +43,7 @@ window.addEventListener('load', loadevent => {
         let label = document.createElement('label');
         label.classList.add('form-label');
         label.setAttribute('for', 'choiseBox');
-        label.innerText = "Choisissez votre lentille :"
+        label.innerText = "Choisissez votre lentille :";
 
         let choise = document.createElement('select');                              //on créé les option du menu déroulant 
         choise.setAttribute('name', 'lense');
@@ -55,7 +57,7 @@ window.addEventListener('load', loadevent => {
         for (var i = 0; i < lenses.length; i++) {
             var lenseList = document.createElement('option');
             lenseList.setAttribute('value',lenses[i]);
-            lenseList.setAttribute("name", lenses[i])
+            lenseList.setAttribute("name", lenses[i]);
             lenseList.textContent =" " + " " +lenses[i];
             choise.appendChild(lenseList);
         }
@@ -66,7 +68,7 @@ window.addEventListener('load', loadevent => {
 
         let price = document.createElement('p');
         price.classList.add('card-text');
-        price.innerHTML += convert(productJson.price/100)
+        price.innerHTML += convertEuro(productJson.price/100);
 
         let submit = document.createElement('button');                                //boutton submit de notre form
         submit.classList.add('btn');
@@ -87,7 +89,6 @@ window.addEventListener('load', loadevent => {
         lense.appendChild(submit);
         
         let frm = document.getElementById('form');
-
         frm.addEventListener("submit", formSubmit);                                     //on vient écouter l'evenement submit du bouton du form, on lance notre fonction
 
 
@@ -106,17 +107,18 @@ window.addEventListener('load', loadevent => {
 
             } else {
                 basket = JSON.parse(basket);                                            
-            }
+            };
+            
+            let lenses = choiseBox.value;
 
             let basketJson = {
                 img: product.imageUrl,
                 name: product.name,
                 _id: product._id,
-                lenses: choiseBox.value,
+                lenses,
                 price: product.price
-            }
-
-            basket.push(basketJson);                                                       // on place notre 
+            };
+            basket.push(basketJson);                                                      // on place notre 
 
             let basketLinea = JSON.stringify(basket);                                     // 
             localStorage.setItem("basket", basketLinea);
@@ -126,6 +128,6 @@ window.addEventListener('load', loadevent => {
 
 });
 
-function convert(number){
+function convertEuro(number){
     return  number.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})
-}
+};
