@@ -1,6 +1,6 @@
 'use strict';
 
-window.addEventListener('load', loadevent => {
+window.addEventListener('DOMContentLoaded', loadevent => {
 
     let product;
     const params = (new URL(document.location)).searchParams;                   //on isole l'id pour pouvoir retrouver la bonne caméra dans la liste

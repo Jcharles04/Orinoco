@@ -1,6 +1,6 @@
 'use strict';
 
-window.addEventListener('load', loadevent => {                  // on met notre JS dans un scope en attendant que la page HTML soit chargée
+window.addEventListener('DOMContentLoaded', loadevent => {                  // on met notre JS dans un scope en attendant que la page HTML soit chargée
 
     const cameraUrl = 'http://localhost:3000/api/cameras/';     //on prépare notre URL pour le fetch
     let camList = document.getElementById('camList');           //on vient pointer notre elemennt HTMl pour la suite 

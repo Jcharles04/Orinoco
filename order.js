@@ -1,6 +1,6 @@
 'use strict';
 
-window.addEventListener('load', loadevent => {
+window.addEventListener('DOMContentLoaded', loadevent => {
 
     let ord = localStorage.getItem("orderResult");
 
