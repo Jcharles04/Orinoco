@@ -2,17 +2,17 @@
 
 window.addEventListener('DOMContentLoaded', loadevent => {
 
-    let ord = localStorage.getItem("orderResult");
+    const ord = localStorage.getItem("orderResult");
 
-    let total = localStorage.getItem("total");
+    const total = localStorage.getItem("total");
 
-    let num = document.getElementById('num');
+    const num = document.getElementById('num');
     num.textContent =  ord;
 
-    let price = document.getElementById('price');
+    const price = document.getElementById('price');
     price.textContent =convertEuro(total/100);
 
-    let home = document.getElementById('clear');
+    const home = document.getElementById('clear');
     home.addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.clear();

@@ -3,6 +3,7 @@
 window.addEventListener('DOMContentLoaded', loadevent => {
 
     let product;
+
     const params = (new URL(document.location)).searchParams;                   //on isole l'id pour pouvoir retrouver la bonne caméra dans la liste
     const id = params.get('id');
 
@@ -20,32 +21,32 @@ window.addEventListener('DOMContentLoaded', loadevent => {
 
     function productBuilder(productJson) {                                         //builder 
 
-        let imgBox = document.getElementById('imgBox');
+        const imgBox = document.getElementById('imgBox');
 
-        let img = document.createElement('img');
+        const img = document.createElement('img');
         img.classList.add('productImg');
         img.setAttribute('src',productJson.imageUrl);
 
-        let camTitle = document.getElementById('cardDesc');
+        const camTitle = document.getElementById('cardDesc');
 
-        let cardBody = document.createElement('div');
+        const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
 
-        let name = document.createElement('h3');
+        const name = document.createElement('h3');
         name.classList.add('card-title');
         name.innerHTML += productJson.name;   
         
-        let lense = document.createElement('form');                                 //on créé un form dans le html, pour povoir utiliser un required plus tard
+        const lense = document.createElement('form');                                 //on créé un form dans le html, pour povoir utiliser un required plus tard
         lense.setAttribute("name", "form");
         lense.setAttribute("id", "form");
         lense.setAttribute("action", "");
 
-        let label = document.createElement('label');
+        const label = document.createElement('label');
         label.classList.add('form-label');
         label.setAttribute('for', 'choiseBox');
         label.innerText = "Choisissez votre lentille :";
 
-        let choise = document.createElement('select');                              //on créé les option du menu déroulant 
+        const choise = document.createElement('select');                              //on créé les option du menu déroulant 
         choise.setAttribute('name', 'lense');
         choise.setAttribute('id', 'choiseBox');
         choise.setAttribute('class', 'form-control');
@@ -53,7 +54,7 @@ window.addEventListener('DOMContentLoaded', loadevent => {
         choise.innerHTML = '<option value=""> Sélectionner </option>';
 
 
-        let lenses = productJson.lenses;                                            //on déclare notre variable lenses et on créé une boucle pour chaque lense
+        const lenses = productJson.lenses;                                            //on déclare notre variable lenses et on créé une boucle pour chaque lense
         for (var i = 0; i < lenses.length; i++) {
             var lenseList = document.createElement('option');
             lenseList.setAttribute('value',lenses[i]);
@@ -62,15 +63,15 @@ window.addEventListener('DOMContentLoaded', loadevent => {
             choise.appendChild(lenseList);
         }
             
-        let desc = document.createElement('p');
+        const desc = document.createElement('p');
         desc.classList.add('card-text');
         desc.innerHTML += productJson.description;
 
-        let price = document.createElement('p');
+        const price = document.createElement('p');
         price.classList.add('card-text');
         price.innerHTML += convertEuro(productJson.price/100);
 
-        let submit = document.createElement('button');                                //boutton submit de notre form
+        const submit = document.createElement('button');                                //boutton submit de notre form
         submit.classList.add('btn');
         submit.classList.add('btn-success');
         submit.setAttribute('id','addToBasket');
@@ -88,16 +89,14 @@ window.addEventListener('DOMContentLoaded', loadevent => {
         lense.appendChild(choise);
         lense.appendChild(submit);
         
-        let frm = document.getElementById('form');
+        const frm = document.getElementById('form');
         frm.addEventListener("submit", formSubmit);                                     //on vient écouter l'evenement submit du bouton du form, on lance notre fonction
-
-
     }
 
     function formSubmit(ev) {                                                            
         ev.preventDefault();                                                            //on empéche 
         
-        let frm = ev.target;
+        const frm = ev.target;
         if (frm.checkValidity()) {                                                      //on vérifie que notre form est bien valide
             console.log("Form valid");
             
@@ -108,19 +107,17 @@ window.addEventListener('DOMContentLoaded', loadevent => {
             } else {
                 basket = JSON.parse(basket);                                            
             };
-            
-            let lenses = choiseBox.value;
 
-            let basketJson = {
+            const basketJson = {
                 img: product.imageUrl,
                 name: product.name,
                 _id: product._id,
-                lenses,
+                lenses: choiseBox.value,
                 price: product.price
             };
             basket.push(basketJson);                                                      // on place notre 
 
-            let basketLinea = JSON.stringify(basket);                                     // 
+            const basketLinea = JSON.stringify(basket);                                     // 
             localStorage.setItem("basket", basketLinea);
 
         }

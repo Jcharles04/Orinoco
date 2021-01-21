@@ -3,14 +3,14 @@
 window.addEventListener('DOMContentLoaded', loadevent => {
 
     let product;
-    let basketList = document.getElementById('array');
+    const basketList = document.getElementById('array');
 
     let total = 0;
-    let sum = document.getElementById('sum');
-    let pId = [];
+    const sum = document.getElementById('sum');
+    const pId = [];
 
-    let basketLinea = localStorage.getItem("basket");
-    let basketJson = JSON.parse(basketLinea);
+    const basketLinea = localStorage.getItem("basket");
+    const basketJson = JSON.parse(basketLinea);
 
     for (let i = 0; i < basketJson.length; i++) {
         product = basketJson[i];
@@ -18,27 +18,30 @@ window.addEventListener('DOMContentLoaded', loadevent => {
         pId.push(product._id);
         basketBuilder(product);
         sum.innerHTML = convertEuro(total/100);
+        console.log(product);
+        console.log(total);
+        console.log(pId);
     }
     
     function basketBuilder(product) {
 
-        let basketBox = document.createElement('tr');
+        const basketBox = document.createElement('tr');
         basketBox.classList.add('basketBox');
         basketBox.classList.add('col-8');  
 
-        let miniImg = document.createElement('td');
+        const miniImg = document.createElement('td');
         miniImg.classList.add('miniImg');
         miniImg.style.backgroundImage = 'url(' + product.img + ')';
 
-        let productName = document.createElement('td');
+        const productName = document.createElement('td');
         productName.classList.add('name');
         productName.innerHTML += product.name;
 
-        let productLense = document.createElement('td');
+        const productLense = document.createElement('td');
         productLense.classList.add('lense');
         productLense.innerHTML += product.lenses;
 
-        let productPrice = document.createElement('td');
+        const productPrice = document.createElement('td');
         productPrice.classList.add('price');
         productPrice.innerHTML += convertEuro(product.price/100);
 
@@ -58,13 +61,13 @@ window.addEventListener('DOMContentLoaded', loadevent => {
     const email = document.getElementById('email');
 
 
-    let orderForm = document.getElementById('form');
+    const orderForm = document.getElementById('form');
     orderForm.addEventListener('submit', orderVal);
 
     function orderVal(ev) {
         ev.preventDefault();
 
-        let ord = ev.target;
+        const ord = ev.target;
         if (ord.checkValidity()) {
             console.log("Form valid");
         }
