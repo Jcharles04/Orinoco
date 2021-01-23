@@ -2,24 +2,24 @@
 
 window.addEventListener('DOMContentLoaded', loadevent => {                  // on met notre JS dans un scope en attendant que la page HTML soit chargée
 
-    const cameraUrl = 'http://localhost:3000/api/cameras/';     //on prépare notre URL pour le fetch
-    const camList = document.getElementById('camList');           //on vient pointer notre elemennt HTMl pour la suite 
+    const cameraUrl = 'http://localhost:3000/api/cameras/';                 //on prépare notre URL pour le fetch
+    const camList = document.getElementById('camList');                     //on vient pointer notre elemennt HTMl pour la suite 
 
-    fetch(cameraUrl)                                            //on envoi une requête à notre API 
-        .then(async result => {                                 //on attend le resultat en async
-            const cameras = await result.json();                //on déclare notre constante avec notre promisse de Json
-            const resultLength = cameras.length;                  //déclaration de variable
-            for (let i = 0; i < resultLength; i++) {            //On créé une boucle qui se répéte pour chaque ligne du JSON
+    fetch(cameraUrl)                                                        //on envoi une requête à notre API 
+        .then(async result => {                                             //on attend le resultat en async
+            const cameras = await result.json();                            //on déclare notre constante avec notre promisse de Json
+            const resultLength = cameras.length;                            //déclaration de variable
+            for (let i = 0; i < resultLength; i++) {                        //On créé une boucle qui se répéte pour chaque ligne du JSON
                 let camera = cameras[i];                      
-                cameraBuilder(camera);                          //On déclare notre builder
+                cameraBuilder(camera);                                      //On déclare notre builder
             }
         })
-        .catch(error => {                                       //on catch les erreurs si on e trouve pas nos API
+        .catch(error => {                                                   //on catch les erreurs si on e trouve pas nos API
             alert('Error API!');
             console.log(error);
         });
 
-    function cameraBuilder(cameraJson) {                         //Fonction builder, le template se répéte pour chaque produit de notre Json
+    function cameraBuilder(cameraJson) {                                    //Fonction builder, le template se répéte pour chaque produit de notre Json
         
         
         const camBox = document.createElement('div');
@@ -52,10 +52,10 @@ window.addEventListener('DOMContentLoaded', loadevent => {                  // o
         camLink.classList.add('btn');
         camLink.classList.add('btn-success');
         camLink.innerText = 'Détails';
-        camLink.href = 'product.html?id=' + cameraJson._id + ''; //au click on se déplace vers la page "Produit" avec l'id du produit dont on va se reservir plus tard
+        camLink.href = './html/product.html?id=' + cameraJson._id + '';         //au click on se déplace vers la page "Produit" avec l'id du produit dont on va se reservir plus tard
 
 
-        camList.appendChild(camBox);                            //on déclare nos liens de parenté
+        camList.appendChild(camBox);                                             //on déclare nos liens de parenté
         camBox.appendChild(imgBox);
         camBox.appendChild(camTitle);
         camTitle.appendChild(name);

@@ -90,35 +90,35 @@ window.addEventListener('DOMContentLoaded', loadevent => {
         lense.appendChild(submit);
         
         const frm = document.getElementById('form');
-        frm.addEventListener("submit", formSubmit);                                     //on vient écouter l'evenement submit du bouton du form, on lance notre fonction
+        frm.addEventListener("submit", formSubmit);                                     //on vient écouter l'evenement submit du bouton du form, on lance notre fonction juste après
     }
 
     function formSubmit(ev) {                                                            
-        ev.preventDefault();                                                            //on empéche 
+        ev.preventDefault();                                                            //on empéche l'évenement normal du boutton pour pouvoir utiliser le reste de la fonction
         
         const frm = ev.target;
         if (frm.checkValidity()) {                                                      //on vérifie que notre form est bien valide
             console.log("Form valid");
             
-            let basket = localStorage.getItem("basket");                        
-            if (!basket) {
-                basket = [];
+            let basket = localStorage.getItem("basket");                                //On vérifie l'état de notre local storage et on récupére notre élément basket dans le local storage
+            if (!basket) {                                                              //si l'élément basket n'éxiste pas...
+                basket = [];                                                            //... on créé un élément basket avec un tableau vide...
 
-            } else {
-                basket = JSON.parse(basket);                                            
+            } else {                                                                    //...sinon...
+                basket = JSON.parse(basket);                                            //... on construit une nouvelle valeur dans le tableau
             };
 
-            const basketJson = {
+            const basketJson = {                                                        // la forme de l'objet dans le tableau basket
                 img: product.imageUrl,
                 name: product.name,
                 _id: product._id,
                 lenses: choiseBox.value,
                 price: product.price
             };
-            basket.push(basketJson);                                                      // on place notre 
+            basket.push(basketJson);                                                      // on place notre notre objet dans le tableau basket
 
-            const basketLinea = JSON.stringify(basket);                                     // 
-            localStorage.setItem("basket", basketLinea);
+            const basketLinea = JSON.stringify(basket);                                   //on donne une valeur à notre JSON
+            localStorage.setItem("basket", basketLinea);                                 //on envoie le tout dans le localStorage 
 
         }
     }

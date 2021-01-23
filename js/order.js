@@ -6,17 +6,17 @@ window.addEventListener('DOMContentLoaded', loadevent => {
 
     const total = localStorage.getItem("total");
 
-    const num = document.getElementById('num');
+    const num = document.getElementById('num');                                         //on affiche nos éléments sur la page
     num.textContent =  ord;
 
-    const price = document.getElementById('price');
+    const price = document.getElementById('price');                                     //on affiche nos éléments sur la page
     price.textContent =convertEuro(total/100);
 
     const home = document.getElementById('clear');
-    home.addEventListener('click', (e) => {
+    home.addEventListener('click', (e) => {                                             //petite fonction pour revenir à l'acceuil et effacer le localstorage
         e.preventDefault();
         localStorage.clear();
-        location.href = "index.html"
+        location.href = "../index.html"
     });
 
 
